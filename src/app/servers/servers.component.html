@@ -17,10 +17,12 @@
     (click)="onCreateServer()"  
 >Add Server</button>
 <!-- <p>Allow New Server: {{ allowNewServer }}</p> -->
-<p>{{ serverCreationStatus }}</p>
-<app-server></app-server>
-<hr>
+<!-- <p>{{ serverCreationStatus }}</p> -->
+<p *ngIf="serverCreated">Server was created, server name is {{ serverName }}</p>
+<app-server *ngFor="let server of servers"></app-server>
 
+<!-- 
+<hr>
 <h3>Assignment 2: Practice Databinding</h3>
 <ol>
     <li>Add an input field which updates a property ('username') via Two-Way-Binding</li>
@@ -39,4 +41,29 @@
     class="btn btn-primary"
     [disabled]="userName === ''"
     (click)="onResetUserName()"
->Reset UserName</button>
+>Reset UserName</button> 
+-->
+
+<hr>
+<h3>Assignment 3: Practice Directives</h3>
+<ol>
+    <li>Add a button which says 'Display Details'</li>
+    <li>Add a paragraph with any content of your choice(e.g. 'Secret Password = tune')</li>
+    <li>Toggle the displaying of that paragraph with the button created in the first step</li>
+    <li>Log all button clicks in an array and output that array below the secret paragraph(maybe log a timestamp or simply an incrementing number</li>
+    <li>Starting at the 5th log item, give all future log items a blue background (via ngStyle) and white color (ngClass)</li>
+</ol>
+
+<hr>
+<button 
+    class="btn btn-primary"
+    (click)="onToggleSecretMessage()"
+>Display Details</button>
+<p *ngIf="displaySecretMessage">Secret Password = tuna</p>
+<div
+    *ngFor="let logItem of log; let i = index"
+    [ngStyle]="{backgroundColor: i >= 4 ? 'blue' : 'transparent'}"
+    [ngClass]="{'white-text': i >= 4}"
+>
+    <p>{{ logItem }}</p>
+</div>
